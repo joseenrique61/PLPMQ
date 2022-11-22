@@ -8,9 +8,7 @@ public class SetInicioCollider : MonoBehaviour {
         BoxCollider boxCollider = GetComponent<BoxCollider>();
         if (boxCollider != null)
         {
-            Vector3 size = GetComponent<MeshRenderer>().bounds.size;
-            boxCollider.size = new Vector3(size.x + 1, size.y + 1, size.z + 1);
-            boxCollider.center = new Vector3(0, size.y / 2, 0);
+            GetComponent<Rigidbody>().detectCollisions = true;
         }
 	}
 	

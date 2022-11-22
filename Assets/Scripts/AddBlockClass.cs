@@ -13,6 +13,12 @@ public class AddBlockClass : MonoBehaviour
             if (!FullProcessCommands.BlocksInOrder.Contains(block))
             {
                 FullProcessCommands.BlocksInOrder.Insert(FullProcessCommands.BlocksInOrder.IndexOf(gameObject) + 1, block);
+                if (FullProcessCommands.BlocksInOrder.IndexOf(block) % 2 != 0)
+                {
+                    block.GetComponent<MeshCollider>().enabled = false;
+                    block.GetComponent<BoxCollider>().enabled = false;
+                }
+
                 block.transform.parent = transform.parent;
                 block.transform.position = new Vector3(block.transform.position.x + 0.5f, block.transform.position.y, block.transform.position.z);
                 Destroy(Flecha);
@@ -20,9 +26,15 @@ public class AddBlockClass : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionExit(Collision collision)
     {
-        Instantiate(Flecha, new Vector3(gameObject.transform.position.x - 0.4f, gameObject.transform.position.y, gameObject.transform.position.z), gameObject.transform.rotation);
+        Destroy(Flecha);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Instantiate(Flecha, new Vector3(gameObject.transform.position.x - 0.8f - gameObject.GetComponent<MeshRenderer>().bounds.size.x / 2, gameObject.transform.position.y - 0.5f, gameObject.transform.position.z), gameObject.transform.rotation);
+        Debug.Log($"Collision! {gameObject.name} skdf {other.name}");
     }
 
     // Start is called before the first frame update
