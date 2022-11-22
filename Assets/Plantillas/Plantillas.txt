@@ -1,0 +1,48 @@
+{
+	"type"?"if",
+	"c#"?"0if (cond)\n~0{\n~1x\n~0}",
+	"c"?"0if (cond)\n~0{\n~1x\n~0}",
+	"python"?"0if cond:\n~1x"
+}*
+{
+	"type"?"else if",
+	"c#"?"0else if (cond)\n~0{\n~1x\n~0}",
+	"c"?"0else if (cond)\n~0{\n~1x\n~0}",
+	"python"?"0elif cond:\n~1x"
+}*
+{
+	"type"?"else",
+	"c"?"0else\n~0{\n~1x\n~0}",
+	"c#"?"0else\n~0{\n~1x\n~0}",
+	"python"?"0else:\n~1x"
+}*
+{
+	"type"?"while",
+	"c"?"0while (cond)\n~0{\n~1x\n~0}",
+	"c#"?"0while (cond)\n~0{\n~1x\n~0}",
+	"python"?"0while cond:\n~1x"
+}*
+{
+	"type"?"int",
+	"c"?"int name = x;",
+	"c#"?"int name = x;",
+	"python"?"name = x"
+}*
+{
+	"type"?"float",
+	"c"?"float name = x;",
+	"c#"?"float name = x;",
+	"python"?"name = x"
+}*
+{
+	"type"?"bool",
+	"c"?"bool name = x;",
+	"c#"?"bool name = x;",
+	"python"?"name = x"
+}*
+{
+	"type"?"string",
+	"c"?"char name[cant] = x",
+	"c#"?"string name = x",
+	"python"?"name = x"
+}
