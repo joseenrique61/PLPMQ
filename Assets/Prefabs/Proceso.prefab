@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 23015761849750170}
   - component: {fileID: 7670773332305656969}
   - component: {fileID: 6513111758162854931}
-  - component: {fileID: 2326635498303650837}
   - component: {fileID: 4801041623939912994}
+  - component: {fileID: 6027947840307583727}
   m_Layer: 0
   m_Name: Proceso
   m_TagString: Untagged
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Flecha: {fileID: 3763916195081105439, guid: 75c038feacb15e8438ef5a6d38fbe067, type: 3}
+  selected: 0
 --- !u!65 &6513111758162854931
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -111,22 +112,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.60000014, y: 2.3298674, z: 5.000001}
-  m_Center: {x: 0, y: 1.8355942, z: -0.5306674}
---- !u!64 &2326635498303650837
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1391739900574912}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3608067802131482031, guid: f344d6c1ad795714daf8dc58fad4845d, type: 3}
+  m_Size: {x: 0.60000014, y: 2.0285778, z: 5.0093803}
+  m_Center: {x: 2.7393059e-17, y: 0.020463824, z: -0.005833864}
 --- !u!54 &4801041623939912994
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -143,3 +130,64 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6027947840307583727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391739900574912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1464721f2283eb14e94a33e812b47be4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactableView: {fileID: 0}
+  _whenHover:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenUnhover:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenSelect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7670773332305656969}
+        m_TargetAssemblyTypeName: AddBlockClass, Assembly-CSharp
+        m_MethodName: EnableSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _whenUnselect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7670773332305656969}
+        m_TargetAssemblyTypeName: AddBlockClass, Assembly-CSharp
+        m_MethodName: DisableSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _whenInteractorViewAdded:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenInteractorViewRemoved:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenSelectingInteractorViewAdded:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenSelectingInteractorViewRemoved:
+    m_PersistentCalls:
+      m_Calls: []

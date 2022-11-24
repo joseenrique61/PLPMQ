@@ -6,41 +6,58 @@ public class AddBlockClass : MonoBehaviour
 {
     public GameObject Flecha;
 
-    public void AddBlock(GameObject block)
+    private GameObject flechaInst;
+
+    public Transform parent;
+
+    public bool selected = false;
+
+    public void EnableSelected()
     {
-        if (FullProcessCommands.BlocksInOrder.Contains(gameObject))
+        selected = true;
+    }
+
+    public void DisableSelected()
+    {
+        selected = false;
+    }
+
+    public void AddThisBlock(GameObject otherBlock)
+    {
+        if (!FullProcessCommands.BlocksInOrder.Contains(gameObject))
         {
-            if (!FullProcessCommands.BlocksInOrder.Contains(block))
+            if (FullProcessCommands.BlocksInOrder.Contains(otherBlock))
             {
-                FullProcessCommands.BlocksInOrder.Insert(FullProcessCommands.BlocksInOrder.IndexOf(gameObject) + 1, block);
-                if (FullProcessCommands.BlocksInOrder.IndexOf(block) % 2 != 0)
+                FullProcessCommands.AddBlock(FullProcessCommands.BlocksInOrder.IndexOf(otherBlock) + 1, gameObject, otherBlock.transform.parent);
+
+                if (FullProcessCommands.BlocksInOrder.IndexOf(gameObject) % 2 != 0)
                 {
-                    block.GetComponent<MeshCollider>().enabled = false;
-                    block.GetComponent<BoxCollider>().enabled = false;
+                    gameObject.GetComponent<BoxCollider>().enabled = false;
                 }
 
-                block.transform.parent = transform.parent;
-                block.transform.position = new Vector3(block.transform.position.x + 0.5f, block.transform.position.y, block.transform.position.z);
-                Destroy(Flecha);
+                Destroy(flechaInst);
             }
         }
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        Destroy(Flecha);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        Instantiate(Flecha, new Vector3(gameObject.transform.position.x - 0.8f - gameObject.GetComponent<MeshRenderer>().bounds.size.x / 2, gameObject.transform.position.y - 0.5f, gameObject.transform.position.z), gameObject.transform.rotation);
-        Debug.Log($"Collision! {gameObject.name} skdf {other.name}");
+        if (selected)
+        {
+            flechaInst = Instantiate(Flecha, new Vector3(gameObject.transform.position.x - 0.4f - gameObject.GetComponent<MeshRenderer>().bounds.size.x / 2, gameObject.transform.position.y + gameObject.GetComponent<MeshRenderer>().bounds.size.y / 2, gameObject.transform.position.z), new Quaternion(gameObject.transform.rotation.x, gameObject.transform.rotation.y + 90, gameObject.transform.rotation.z, gameObject.transform.rotation.w));
+            Debug.Log($"Trigger! {gameObject.name} with {other.name}");
+            AddThisBlock(other.gameObject);
+        }
+    }
+
+    private void OnTriggerExit(Collider collision)
+    {
+        Destroy(flechaInst);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     void Update()
