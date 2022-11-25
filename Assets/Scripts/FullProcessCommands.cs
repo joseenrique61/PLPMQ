@@ -16,9 +16,9 @@ public class FullProcessCommands : MonoBehaviour {
     {
         BlocksInOrder.Insert(index, block);
         block.transform.SetParent(parent);
-        for (int i = index; i < blocksInOrder.Count; i++)
+        for (int i = index; i < BlocksInOrder.Count; i++)
         {
-            BlocksInOrder[i].transform.localPosition = new Vector3(BlocksInOrder[0].transform.localPosition.x, BlocksInOrder[0].transform.localPosition.y - 2.02f * i, BlocksInOrder[0].transform.localPosition.z);
+            BlocksInOrder[i].transform.localPosition = new Vector3(BlocksInOrder[0].transform.localPosition.x + 0.005f, BlocksInOrder[0].transform.localPosition.y - 2.0116f * i, BlocksInOrder[0].transform.localPosition.z);
         }
     }
 

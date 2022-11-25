@@ -12,11 +12,11 @@ public class MoveObject : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (transform.parent != parent)
         {
-            transform.position += new Vector3(0, 0.02f, 0);
+            transform.position += new Vector3(0, 0.1f, 0);
         }
     }
 }

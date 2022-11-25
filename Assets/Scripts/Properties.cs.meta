@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: 5201d2de24b2c80419d112613f489e02
+guid: 33fac40c780b0aa4681efcfeeb2b33f3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - Flecha: {fileID: 3763916195081105439, guid: 75c038feacb15e8438ef5a6d38fbe067, type: 3}
-  - parent: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

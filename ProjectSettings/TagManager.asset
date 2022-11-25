@@ -3,7 +3,22 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Inicio
+  - Proceso
+  - If
+  - ElseIf
+  - Else
+  - EndIf
+  - While
+  - EndWhile
+  - Input
+  - Output
+  - Int
+  - Float
+  - String
+  - Bool
+  - Fin
   layers:
   - Default
   - TransparentFX

@@ -30,10 +30,15 @@ public class AddBlockClass : MonoBehaviour
             {
                 FullProcessCommands.AddBlock(FullProcessCommands.BlocksInOrder.IndexOf(otherBlock) + 1, gameObject, otherBlock.transform.parent);
 
-                if (FullProcessCommands.BlocksInOrder.IndexOf(gameObject) % 2 != 0)
+                if (gameObject.CompareTag("Fin"))
                 {
-                    gameObject.GetComponent<BoxCollider>().enabled = false;
+                    SyntaxChecker syn = new();
                 }
+
+                //if (FullProcessCommands.BlocksInOrder.IndexOf(gameObject) % 2 != 0)
+                //{
+                //    gameObject.GetComponent<BoxCollider>().enabled = false;
+                //}
 
                 Destroy(flechaInst);
             }
@@ -53,15 +58,5 @@ public class AddBlockClass : MonoBehaviour
     private void OnTriggerExit(Collider collision)
     {
         Destroy(flechaInst);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-        
     }
 }
