@@ -37,12 +37,12 @@ public class Converter
     /// <param name="x">Código a reemplazar.</param>
     /// <param name="language">Lenguaje en el que se va a reemplazar.</param>
     /// <returns>Cadena reemplazada.</returns>
-    public string WithCond(string blockType, string cond, string x, string language)
+    public string WithCond(string blockType, string cond, string x, string language, int initialTab)
     {
         string plantilla = GetFileContent(blockType, language);
         string replaced = Replace(plantilla, x, "x");
         replaced = Replace(replaced, cond, "cond");
-        replaced = AddTabulation(replaced);
+        replaced = AddTabulation(replaced, initialTab);
         return replaced;
     }
 
@@ -54,11 +54,12 @@ public class Converter
     /// <param name="x">Código a reemplazar.</param>
     /// <param name="language">Lenguaje en el que se va a reemplazar.</param>
     /// <returns>Cadena reemplazada.</returns>
-    public string WithName(string blockType, string name, string x, string language)
+    public string WithName(string blockType, string name, string x, string language, int initialTab)
     {
         string plantilla = GetFileContent(blockType, language);
         string replaced = Replace(plantilla, x, "x");
         replaced = Replace(replaced, name, "name");
+        replaced = AddTabulation(replaced, initialTab);
         return replaced;
     }
 
@@ -71,12 +72,13 @@ public class Converter
     /// <param name="x">Código a reemplazar.</param>
     /// <param name="language">Lenguaje en el que se va a reemplazar.</param>
     /// <returns>Cadena reemplazada.</returns>
-    public string WithCant(string blockType, string name,string cant, string x, string language)
+    public string WithCant(string blockType, string name,string cant, string x, string language, int initialTab)
     {
         string plantilla = GetFileContent(blockType, language);
         string replaced = Replace(plantilla, x, "x");
         replaced = Replace(replaced, name, "name");
         replaced = Replace(replaced, cant, "cant");
+        replaced = AddTabulation(replaced, initialTab);
         return replaced;
     }
 
@@ -98,13 +100,13 @@ public class Converter
     /// </summary>
     /// <param name="block">Código al que se le va a añadir la tabulación.</param>
     /// <returns>Cadena tabulada e indentada.</returns>
-    private string AddTabulation(string block)
+    private string AddTabulation(string block, int initialTab)
     {
         string indented = "";
         string[] blockSplitted = block.Split('~');
         foreach (string line in blockSplitted)
         {
-            int num = int.Parse(line[0].ToString());
+            int num = int.Parse(line[0].ToString()) + initialTab;
             string tabString = "";
             for (int i = 0; i < num; i++)
             {

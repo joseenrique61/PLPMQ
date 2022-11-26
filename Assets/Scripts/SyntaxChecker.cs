@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.XR.CoreUtils;
 using UnityEngine;
 
 public class SyntaxChecker
@@ -8,13 +7,14 @@ public class SyntaxChecker
 
     private int currentSentence = 0;
 
-    public SyntaxChecker()
+    /// <summary>
+    /// Itera a través de la lista con los bloques en orden y determina si hay errores de sintaxis o no.
+    /// </summary>
+    /// <returns>True si no hay errores, false si hay.</returns>
+    public bool CheckSyntax()
     {
-        Iterate();
-    }
+        bool correctSyntax = true;
 
-    private void Iterate()
-    {
         foreach (GameObject gameObject in FullProcessCommands.BlocksInOrder)
         {
             Properties.TypeEnum type = gameObject.GetComponent<Properties>().Type;
@@ -27,11 +27,11 @@ public class SyntaxChecker
             {
                 try
                 {
-                    //SetCurrentS(type);
                     if (!(type == openSentences[currentSentence].ifWhileGameObject.GetComponent<Properties>().Type))
                     {
                         Debug.LogError("Se inició una sentencia Else sin un If.");
-                        return;
+                        correctSyntax = false;
+                        break;
                     }
 
                     if (!openSentences[currentSentence].hasElse)
@@ -41,43 +41,46 @@ public class SyntaxChecker
                     else
                     {
                         Debug.LogError("Hay una sentencia Else luego de otro Else.");
-                        return;
+                        correctSyntax= false;
+                        break;
                     }
                 }
                 catch (KeyNotFoundException)
                 {
                     Debug.LogError("Hay una sentencia Else luego del cierre del If.");
-                    return;
+                    correctSyntax = false;
+                    break;
                 }
             }
             else if (gameObject.CompareTag("ElseIf"))
             {
                 try
                 {
-                    //SetCurrentS(type);
                     if (!(type == openSentences[currentSentence].ifWhileGameObject.GetComponent<Properties>().Type))
                     {
                         Debug.LogError("Se inició una sentencia ElseIf sin un If.");
-                        return;
+                        correctSyntax = false;
+                        break;
                     }
 
                     if (openSentences[currentSentence].hasElse)
                     {
                         Debug.LogError("Hay una sentencia ElseIf luego de un Else.");
-                        return;
+                        correctSyntax = false;
+                        break;
                     }
                 }
                 catch (KeyNotFoundException)
                 {
                     Debug.LogError("Hay una sentencia ElseIf luego del cierre del If.");
-                    return;
+                    correctSyntax = false;
+                    break;
                 }
             }
             else if (gameObject.CompareTag("EndIf") || gameObject.CompareTag("EndWhile"))
             {
                 try
                 {
-                    //SetCurrentS(type);
                     if (type == openSentences[currentSentence].ifWhileGameObject.GetComponent<Properties>().Type)
                     {
                         RemoveOpenS();
@@ -86,7 +89,8 @@ public class SyntaxChecker
                 catch (KeyNotFoundException)
                 {
                     Debug.LogError("No es correcta la sintaxis.");
-                    return;
+                    correctSyntax = false;
+                    break;
                 }
             }
         }
@@ -100,29 +104,26 @@ public class SyntaxChecker
         {
             Debug.LogError("No hay un bloque de fin.");
         }
+
+        return correctSyntax;
     }
 
+    /// <summary>
+    /// Añade un bloque a la lista de openSentences.
+    /// </summary>
+    /// <param name="gameObject">Objeto a añadir.</param>
     private void AddOpenS(GameObject gameObject)
     {
         currentSentence++;
         openSentences.Add(currentSentence, new IfWhileClass(gameObject));
     }
-
+    
+    /// <summary>
+    /// Remueve el último bloque de openSentences.
+    /// </summary>
     private void RemoveOpenS()
     {
         openSentences.Remove(currentSentence);
         currentSentence--;
     }
-
-    //private void SetCurrentS(Properties.TypeEnum type)
-    //{
-    //    for (int i = currentSentence; i >= openSentences.Count; i--)
-    //    {
-    //        if (type == openSentences[i].ifWhileGameObject.GetComponent<Properties>().Type)
-    //        {
-    //            Debug.LogWarning(i != currentSentence ? "Changed i." : "Stays the same.");
-    //            currentSentence = i;
-    //        }
-    //    }
-    //}
 }

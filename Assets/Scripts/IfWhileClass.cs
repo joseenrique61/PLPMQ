@@ -8,8 +8,8 @@ public class IfWhileClass
 
     public GameObject ifWhileGameObject;
 
-    public IfWhileClass(GameObject ifGameObject)
+    public IfWhileClass(GameObject ifWhileGameObject)
     {
-        this.ifWhileGameObject = ifGameObject;
+        this.ifWhileGameObject = ifWhileGameObject;
     }
 }

@@ -5,18 +5,14 @@ using UnityEngine;
 public class MoveObject : MonoBehaviour
 {
     public Transform parent;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    public Vector3 increment;
+
     void FixedUpdate()
     {
         if (transform.parent != parent)
         {
-            transform.position += new Vector3(0, 0.1f, 0);
+            transform.position += new Vector3(increment.x, increment.y, increment.z);
         }
     }
 }

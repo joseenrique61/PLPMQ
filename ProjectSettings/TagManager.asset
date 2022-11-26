@@ -19,6 +19,8 @@ TagManager:
   - String
   - Bool
   - Fin
+  - EndElseIf
+  - EndElse
   layers:
   - Default
   - TransparentFX

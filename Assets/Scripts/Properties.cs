@@ -26,7 +26,7 @@ public class Properties : MonoBehaviour
     public string Name;
 
     [HideInInspector]
-    public string Cant;
+    public int Cant;
 
     [HideInInspector]
     public string Instruction;
@@ -70,6 +70,7 @@ public class MyEditorClass : Editor
             EditorGUI.indentLevel++;
             myBehaviour.Name = EditorGUILayout.TextField("Name", myBehaviour.Name);
             myBehaviour.Instruction = EditorGUILayout.TextField("Instruction", myBehaviour.Instruction);
+            myBehaviour.Cant = myBehaviour.Instruction.Length + 1;
             EditorGUI.indentLevel--;
         }
     }

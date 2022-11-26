@@ -12,6 +12,8 @@ public class AddBlockClass : MonoBehaviour
 
     public bool selected = false;
 
+    private List<Collider> colliders = new List<Collider>();
+
     public void EnableSelected()
     {
         selected = true;
@@ -32,7 +34,8 @@ public class AddBlockClass : MonoBehaviour
 
                 if (gameObject.CompareTag("Fin"))
                 {
-                    SyntaxChecker syn = new();
+                    SyntaxChecker sy = new();
+                    sy.CheckSyntax();
                 }
 
                 //if (FullProcessCommands.BlocksInOrder.IndexOf(gameObject) % 2 != 0)
@@ -47,16 +50,20 @@ public class AddBlockClass : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        colliders.Add(other);
         if (selected)
         {
-            flechaInst = Instantiate(Flecha, new Vector3(gameObject.transform.position.x - 0.4f - gameObject.GetComponent<MeshRenderer>().bounds.size.x / 2, gameObject.transform.position.y + gameObject.GetComponent<MeshRenderer>().bounds.size.y / 2, gameObject.transform.position.z), new Quaternion(gameObject.transform.rotation.x, gameObject.transform.rotation.y + 90, gameObject.transform.rotation.z, gameObject.transform.rotation.w));
-            Debug.Log($"Trigger! {gameObject.name} with {other.name}");
-            AddThisBlock(other.gameObject);
+            Collider collider = colliders.Count > 1 ? colliders[0].gameObject.transform.position.y < colliders[1].gameObject.transform.position.y ? colliders[0] : colliders[1] : colliders[0];
+            flechaInst = Instantiate(Flecha, new Vector3(collider.transform.position.x - 0.4f - collider.GetComponent<MeshRenderer>().bounds.size.x / 2, collider.transform.position.y + collider.GetComponent<MeshRenderer>().bounds.size.y / 2, collider.transform.position.z), new Quaternion(collider.transform.rotation.x, collider.transform.rotation.y + 90, collider.transform.rotation.z, collider.transform.rotation.w));
+            Debug.Log($"Trigger! {gameObject.name} with {collider.name}");
+            AddThisBlock(collider.gameObject);
+            DisableSelected();
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    private void OnTriggerExit(Collider other)
     {
         Destroy(flechaInst);
+        colliders.Remove(other);
     }
 }

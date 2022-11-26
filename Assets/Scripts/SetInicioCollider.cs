@@ -1,19 +1,14 @@
 ﻿using UnityEngine;
 
-public class SetInicioCollider : MonoBehaviour {
-
+public class SetInicioCollider : MonoBehaviour 
+{
 	// Use this for initialization
 	void Start ()
     {
         BoxCollider boxCollider = GetComponent<BoxCollider>();
         if (boxCollider != null)
         {
-            GetComponent<Rigidbody>().detectCollisions = true;
+            boxCollider.size = new Vector3(boxCollider.size.x + 2, boxCollider.size.y, boxCollider.size.z);
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }
