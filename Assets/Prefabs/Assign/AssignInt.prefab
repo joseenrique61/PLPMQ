@@ -67,6 +67,26 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 88419975b55eb5347b299941175fb698, type: 2}
+    - target: {fileID: 150616562227316008, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
+      propertyPath: m_text
+      value: Definir x como entero
+      objectReference: {fileID: 0}
+    - target: {fileID: 150616562227316008, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
+      propertyPath: m_margin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 150616562227316008, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
+      propertyPath: m_margin.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 150616562227316008, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
+      propertyPath: m_overflowMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4533994447794798972, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.87
+      objectReference: {fileID: 0}
     - target: {fileID: 8082290141627041514, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
       propertyPath: Type
       value: 3

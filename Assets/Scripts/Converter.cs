@@ -30,6 +30,21 @@ public class Converter
     }
 
     /// <summary>
+    /// Crea una nueva cadena reemplazada de sentencias con instrucciones.
+    /// </summary>
+    /// <param name="blockType">Tipo de bloque a reemplazar.</param>
+    /// <param name="x">Código a reemplazar.</param>
+    /// <param name="language">Lenguaje en el que se va a reemplazar.</param>
+    /// <returns>Cadena reemplazada.</returns>
+    public string WithInstruction(string blockType, string x, string language, int initialTab)
+    {
+        string plantilla = GetFileContent(blockType, language);
+        string replaced = Replace(plantilla, x, "x");
+        replaced = AddTabulation(replaced, initialTab);
+        return replaced;
+    }
+
+    /// <summary>
     /// Crea una nueva cadena reemplazada de sentencias con condicionales.
     /// </summary>
     /// <param name="blockType">Tipo de bloque a reemplazar.</param>
@@ -72,7 +87,7 @@ public class Converter
     /// <param name="x">Código a reemplazar.</param>
     /// <param name="language">Lenguaje en el que se va a reemplazar.</param>
     /// <returns>Cadena reemplazada.</returns>
-    public string WithCant(string blockType, string name,string cant, string x, string language, int initialTab)
+    public string WithCant(string blockType, string name, string cant, string x, string language, int initialTab)
     {
         string plantilla = GetFileContent(blockType, language);
         string replaced = Replace(plantilla, x, "x");

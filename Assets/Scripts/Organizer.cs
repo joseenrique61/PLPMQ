@@ -40,7 +40,7 @@ public class Organizer
 
         while (true)
         {
-            GameObject lastGameObject = null;
+            GameObject lastGameObject = new();
             bool addBlock = false;
 
             foreach (GameObject gameObject in internalBlocksInOrder.Cast<GameObject>())
@@ -72,7 +72,7 @@ public class Organizer
             }
         }
 
-        if (internalBlocksInOrder[0] is GameObject initialGameObject && internalBlocksInOrder[^1] is GameObject finalGameObject)
+        if (internalBlocksInOrder[0] is GameObject initialGameObject && internalBlocksInOrder[internalBlocksInOrder.Count - 1] is GameObject finalGameObject)
         {
             AddDividedBlock(initialGameObject, finalGameObject);
         }
@@ -91,16 +91,24 @@ public class Organizer
             { "While", "EndWhile" }
         };
 
+        string currentTag;
         foreach (GameObject gameObject in FullProcessCommands.BlocksInOrder)
         {
             if (tags.Keys.Contains(gameObject.tag))
             {
-                GameObject newGameObject = new()
-                {
-                    tag = tags[gameObject.tag]
-                };
+                currentTag = gameObject.tag;
 
-                internalBlocksInOrder.Insert(internalBlocksInOrder.IndexOf(gameObject) - 1, newGameObject);
+                if (!string.IsNullOrEmpty(currentTag))
+                {
+                    GameObject newGameObject = new()
+                    {
+                        tag = tags[currentTag]
+                    };
+
+                    newGameObject.AddComponent<Properties>();
+
+                    internalBlocksInOrder.Insert(internalBlocksInOrder.IndexOf(gameObject) - 1, newGameObject);
+                }
             }
 
             if (gameObject.CompareTag("EndIf"))

@@ -59,5 +59,9 @@ PrefabInstance:
       propertyPath: m_TagString
       value: String
       objectReference: {fileID: 0}
+    - target: {fileID: 5064750011224823054, guid: 3e9053a3a59d1a342b1c4d8ad15572b5, type: 3}
+      propertyPath: m_text
+      value: Definir x como cadena
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e9053a3a59d1a342b1c4d8ad15572b5, type: 3}
