@@ -17,7 +17,7 @@ public class JsonConverter
     private static Dictionary<string, string> CreateDicts(string str1)
     {
         Dictionary<string, string> dict = new Dictionary<string, string>();
-        string[] splitString = str1.Split(',');
+        string[] splitString = str1.Split('+');
         foreach (string str2 in splitString)
         {
             char[] trimChars = {' ', '\r', '\n', '\t', '{', '}'};

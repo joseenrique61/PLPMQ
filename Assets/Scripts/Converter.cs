@@ -16,6 +16,7 @@ public class Converter
     {
         string fileContent = "";
         string file = File.ReadAllText(path);
+        file = file.Replace("\\r\\n", "\r\n");
         List<Dictionary<string, string>> jArrayFile = JsonConverter.Convert(file);
         foreach (Dictionary<string, string> jobject in jArrayFile)
         {
@@ -69,11 +70,10 @@ public class Converter
     /// <param name="x">Código a reemplazar.</param>
     /// <param name="language">Lenguaje en el que se va a reemplazar.</param>
     /// <returns>Cadena reemplazada.</returns>
-    public string WithName(string blockType, string name, string x, string language, int initialTab)
+    public string WithName(string blockType, string name, string language, int initialTab)
     {
         string plantilla = GetFileContent(blockType, language);
-        string replaced = Replace(plantilla, x, "x");
-        replaced = Replace(replaced, name, "name");
+        string replaced = Replace(plantilla, name, "name");
         replaced = AddTabulation(replaced, initialTab);
         return replaced;
     }
@@ -106,6 +106,8 @@ public class Converter
     /// <returns></returns>
     private string Replace(string block, string toReplace, string toPass)
     {
+        char[] trimChars = {'\t', '\n', '\r'};
+        toReplace = toReplace.Trim(trimChars);
         string replaced = block.Replace(toPass, toReplace);
         return replaced;
     }
@@ -122,12 +124,13 @@ public class Converter
         foreach (string line in blockSplitted)
         {
             int num = int.Parse(line[0].ToString()) + initialTab;
+            string internalLine = line[1..];
             string tabString = "";
             for (int i = 0; i < num; i++)
             {
                 tabString += "\t";
             }
-            string newString = tabString + line.Trim(char.Parse(num.ToString()));
+            string newString = tabString + internalLine.Trim(char.Parse(num.ToString()));
             indented += newString;
         }
         return indented;

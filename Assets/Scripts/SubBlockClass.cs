@@ -3,13 +3,13 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class SubBlockClass : Object
+public class SubBlockClass : ScriptableObject
 {
     private List<Object> blocks = new();
-    private readonly string language;
+    private string language;
     public int currentTab = 0;
 
-    public SubBlockClass(Object[] blocks)
+    public void Init(Object[] blocks)
     {
         language = Exporter.language;
         this.blocks = blocks.ToList();
@@ -42,13 +42,12 @@ public class SubBlockClass : Object
                         gameObjectString = converter.WithInstruction("Else", fullString.ToString(), language, currentTab);
                         fullString = new StringBuilder();
                         break;
-                    case "Proceso":
-                        gameObjectString = gameObject.GetComponent<Properties>().Instruction;
-                        break;
-                    case "Input" or "Output" or "Int" or "Float" or "String" or "Bool":
+                    case "Input" or "Output" or "Proceso":
                         gameObjectString = converter.WithInstruction(gameObject.tag, gameObject.GetComponent<Properties>().Instruction, language, currentTab);
                         break;
-
+                    case "Int" or "Float" or "String" or "Bool":
+                        gameObjectString = converter.WithName(gameObject.tag, gameObject.GetComponent<Properties>().Name, language, currentTab);
+                        break;
                 }
             }
             else if (block is SubBlockClass subBlock)

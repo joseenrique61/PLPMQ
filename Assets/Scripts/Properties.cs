@@ -36,10 +36,10 @@ public class Properties : MonoBehaviour
     {
         if (text != null)
         {
-            text.text.Replace("cond", Condition);
-            text.text.Replace("name", Name);
-            text.text.Replace("cant", Cant.ToString());
-            text.text.Replace("x", Instruction);
+            text.text = text.text.Replace("cond", Condition);
+            text.text = text.text.Replace("name", Name);
+            text.text = text.text.Replace("cant", Cant.ToString());
+            text.text = text.text.Replace("x", Instruction);
         }
     }
 }

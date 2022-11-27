@@ -43,22 +43,25 @@ public class Organizer
             GameObject lastGameObject = new();
             bool addBlock = false;
 
-            foreach (GameObject gameObject in internalBlocksInOrder.Cast<GameObject>())
+            foreach (Object currentObject in internalBlocksInOrder)
             {
-                Properties.TypeEnum type = gameObject.GetComponent<Properties>().Type;
+                if (currentObject is GameObject gameObject)
+                {
+                    Properties.TypeEnum type = gameObject.GetComponent<Properties>().Type;
 
-                if (gameObject.CompareTag("If") || gameObject.CompareTag("While"))
-                {
-                    AddOpenS(gameObject);
-                }
-                else if (gameObject.CompareTag("EndIf") || gameObject.CompareTag("EndElseIf") || gameObject.CompareTag("EndElse") || gameObject.CompareTag("EndWhile"))
-                {
-                    if (type == openSentences[currentSentence].ifWhileGameObject.GetComponent<Properties>().Type)
+                    if (gameObject.CompareTag("If") || gameObject.CompareTag("ElseIf") || gameObject.CompareTag("Else") || gameObject.CompareTag("While"))
                     {
-                        lastGameObject= gameObject;
-                        addBlock = true;
-                        break;
+                        AddOpenS(gameObject);
                     }
+                    else if (gameObject.CompareTag("EndIf") || gameObject.CompareTag("EndElseIf") || gameObject.CompareTag("EndElse") || gameObject.CompareTag("EndWhile"))
+                    {
+                        if (type == openSentences[currentSentence].ifWhileGameObject.GetComponent<Properties>().Type)
+                        {
+                            lastGameObject = gameObject;
+                            addBlock = true;
+                            break;
+                        }
+                    } 
                 }
             }
             
@@ -88,16 +91,15 @@ public class Organizer
             { "If", "EndIf" },
             { "ElseIf", "EndElseIf" },
             { "Else", "EndElse" },
-            { "While", "EndWhile" }
+            { "While", "EndWhile" },
+            { "EndIf", "EndIf" }
         };
 
-        string currentTag;
+        string currentTag = "";
         foreach (GameObject gameObject in FullProcessCommands.BlocksInOrder)
         {
             if (tags.Keys.Contains(gameObject.tag))
             {
-                currentTag = gameObject.tag;
-
                 if (!string.IsNullOrEmpty(currentTag))
                 {
                     GameObject newGameObject = new()
@@ -106,12 +108,14 @@ public class Organizer
                     };
 
                     newGameObject.AddComponent<Properties>();
+                    newGameObject.GetComponent<Properties>().Type = Properties.TypeEnum.Conditional;
 
-                    internalBlocksInOrder.Insert(internalBlocksInOrder.IndexOf(gameObject) - 1, newGameObject);
+                    internalBlocksInOrder.Insert(internalBlocksInOrder.IndexOf(gameObject), newGameObject);
                 }
+                currentTag = gameObject.tag;
             }
 
-            if (gameObject.CompareTag("EndIf"))
+            if (tags.Values.Contains(gameObject.tag))
             {
                 internalBlocksInOrder.Remove(gameObject);
             }
@@ -144,7 +148,7 @@ public class Organizer
                 break;
         }
 
-        for (int i = internalBlocksInOrder.IndexOf(currentBlock); i >= internalBlocksInOrder.Count; i--)
+        for (int i = internalBlocksInOrder.IndexOf(currentBlock); i >= 0; i--)
         {
             if (internalBlocksInOrder[i] is GameObject currentGameObject)
             {
@@ -166,14 +170,17 @@ public class Organizer
     private void AddDividedBlock(GameObject initialBlock, GameObject finalBlock)
     {
         RemoveOpenS();
-        List<GameObject> blocks = new();
+        List<Object> blocks = new();
         for (int i = internalBlocksInOrder.IndexOf(initialBlock); i <= internalBlocksInOrder.IndexOf(finalBlock); i++)
         {
-            if (internalBlocksInOrder[i] is GameObject currentGameObject)
-            blocks.Add(currentGameObject);
+            if (internalBlocksInOrder[i] is Object currentObject)
+            {
+                blocks.Add(currentObject);
+            }
         }
         currentIndexOfDividedBlocks++;
-        SubBlockClass subBlock = new(blocks.ToArray());
+        SubBlockClass subBlock = ScriptableObject.CreateInstance("SubBlockClass") as SubBlockClass;
+        subBlock.Init(blocks.ToArray());
         dividedBlocks.Add(currentIndexOfDividedBlocks, subBlock);
         ReplaceInternalBIO(blocks, subBlock);
     }
@@ -183,11 +190,11 @@ public class Organizer
     /// </summary>
     /// <param name="gameObjects">Lista con los bloques.</param>
     /// <param name="subBlock">SubBlockClass en el que están contenidos los bloques a reemplazar.</param>
-    private void ReplaceInternalBIO(List<GameObject> gameObjects, SubBlockClass subBlock)
+    private void ReplaceInternalBIO(List<Object> gameObjects, SubBlockClass subBlock)
     {
         internalBlocksInOrder.Insert(internalBlocksInOrder.IndexOf(gameObjects[0]), subBlock);
 
-        foreach (GameObject gameObject in gameObjects)
+        foreach (Object gameObject in gameObjects)
         {
             internalBlocksInOrder.Remove(gameObject);
         }
