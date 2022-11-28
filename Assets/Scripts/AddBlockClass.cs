@@ -35,7 +35,7 @@ public class AddBlockClass : MonoBehaviour
                 if (gameObject.CompareTag("Fin"))
                 {
                     SyntaxChecker sy = new();
-                    sy.CheckSyntax();
+                    Debug.LogWarning(sy.CheckSyntax());
                 }
 
                 //if (FullProcessCommands.BlocksInOrder.IndexOf(gameObject) % 2 != 0)

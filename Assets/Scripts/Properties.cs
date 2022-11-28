@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[Serializable]
 public class Properties : MonoBehaviour
 {
     public enum TypeEnum
@@ -22,13 +25,16 @@ public class Properties : MonoBehaviour
 
     public TypeEnum Type;
 
+    [HideInInspector]
     public string Condition = "";
 
+    [HideInInspector]
     public string Name = "";
 
     [HideInInspector]
     public int Cant = 0;
 
+    [HideInInspector]
     public string Instruction = "";
 
 
@@ -36,54 +42,59 @@ public class Properties : MonoBehaviour
     {
         if (text != null)
         {
-            text.text = text.text.Replace("cond", Condition);
-            text.text = text.text.Replace("name", Name);
-            text.text = text.text.Replace("cant", Cant.ToString());
-            text.text = text.text.Replace("x", Instruction);
+            switch (Type)
+            {
+                case TypeEnum.Process:
+                    text.text = text.text.Replace("x", Instruction);
+                    break;
+                case TypeEnum.Conditional or TypeEnum.While:
+                    text.text = text.text.Replace("cond", Condition);
+                    break;
+                case TypeEnum.Assign:
+                    text.text = text.text.Replace("name", Name);
+                    break;
+            }
         }
     }
 }
 
-//[CustomEditor(typeof(Properties))]
-//public class MyEditorClass : Editor
-//{
-//    public override void OnInspectorGUI()
-//    {
-//        // If we call base the default inspector will get drawn too.
-//        // Remove this line if you don't want that to happen.
-//        base.OnInspectorGUI();
+[CustomEditor(typeof(Properties))]
+public class MyEditorClass : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        // If we call base the default inspector will get drawn too.
+        // Remove this line if you don't want that to happen.
+        base.OnInspectorGUI();
 
-//        Properties myBehaviour = target as Properties;
+        Properties myBehaviour = target as Properties;
 
-//        if (myBehaviour.Type == Properties.TypeEnum.Process)
-//        {
-//            // Draw the optional fields here
-//            EditorGUI.indentLevel++;
-//            myBehaviour.Instruction = EditorGUILayout.TextField("Instruction", myBehaviour.Instruction);
-//            EditorGUI.indentLevel--;
-//        }
-//        else if (myBehaviour.Type == Properties.TypeEnum.Conditional)
-//        {
-//            // Draw the optional fields here
-//            EditorGUI.indentLevel++;
-//            myBehaviour.Condition = EditorGUILayout.TextField("Condition", myBehaviour.Condition);
-//            EditorGUI.indentLevel--;
-//        }
-//        else if (myBehaviour.Type == Properties.TypeEnum.While)
-//        {
-//            // Draw the optional fields here
-//            EditorGUI.indentLevel++;
-//            myBehaviour.Condition = EditorGUILayout.TextField("Condition", myBehaviour.Condition);
-//            EditorGUI.indentLevel--;
-//        }
-//        else if (myBehaviour.Type == Properties.TypeEnum.Assign)
-//        {
-//            // Draw the optional fields here
-//            EditorGUI.indentLevel++;
-//            myBehaviour.Name = EditorGUILayout.TextField("Name", myBehaviour.Name);
-//            myBehaviour.Instruction = EditorGUILayout.TextField("Instruction", myBehaviour.Instruction);
-//            myBehaviour.Cant = myBehaviour.Instruction.Length + 1;
-//            EditorGUI.indentLevel--;
-//        }
-//    }
-//}
+        if (myBehaviour.Type == Properties.TypeEnum.Process)
+        {
+            // Draw the optional fields here
+            EditorGUI.indentLevel++;
+            myBehaviour.Instruction = EditorGUILayout.TextField("Instruction", myBehaviour.Instruction);
+            EditorGUI.indentLevel--;
+        }
+        else if (myBehaviour.Type == Properties.TypeEnum.Conditional || myBehaviour.Type == Properties.TypeEnum.While)
+        {
+            // Draw the optional fields here
+            EditorGUI.indentLevel++;
+            myBehaviour.Condition = EditorGUILayout.TextField("Condition", myBehaviour.Condition);
+            EditorGUI.indentLevel--;
+        }
+        else if (myBehaviour.Type == Properties.TypeEnum.Assign)
+        {
+            // Draw the optional fields here
+            EditorGUI.indentLevel++;
+            myBehaviour.Name = EditorGUILayout.TextField("Name", myBehaviour.Name);
+            EditorGUI.indentLevel--;
+        }
+
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(myBehaviour);
+            EditorSceneManager.MarkSceneDirty(myBehaviour.gameObject.scene);
+        }
+    }
+}

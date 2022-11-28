@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4e503a94b0e5148408d16d9677b478c3, type: 2}
     - target: {fileID: 150616562227316008, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
       propertyPath: m_text
-      value: Si x
+      value: Si cond
       objectReference: {fileID: 0}
     - target: {fileID: 8082290141627041514, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
       propertyPath: Type

@@ -7,7 +7,7 @@ public class SubBlockClass : ScriptableObject
 {
     private List<Object> blocks = new();
     private string language;
-    public int currentTab = 0;
+    public static int currentTab = 0;
 
     public void Init(Object[] blocks)
     {
@@ -26,6 +26,7 @@ public class SubBlockClass : ScriptableObject
     {
         StringBuilder fullString = new();
         Converter converter = new();
+        bool resetFullString = false;
         currentTab++;
         foreach (Object block in blocks)
         {
@@ -35,12 +36,18 @@ public class SubBlockClass : ScriptableObject
                 switch (gameObject.tag)
                 {
                     case "If" or "ElseIf" or "While":
+                        currentTab--;
                         gameObjectString = converter.WithCond(gameObject.tag, gameObject.GetComponent<Properties>().Condition, fullString.ToString(), language, currentTab);
-                        fullString = new StringBuilder();
+                        currentTab++;
+                        fullString.Clear();
+                        resetFullString = true;
                         break;
                     case "Else":
+                        currentTab++;
                         gameObjectString = converter.WithInstruction("Else", fullString.ToString(), language, currentTab);
-                        fullString = new StringBuilder();
+                        currentTab--;
+                        fullString.Clear();
+                        resetFullString = true;
                         break;
                     case "Input" or "Output" or "Proceso":
                         gameObjectString = converter.WithInstruction(gameObject.tag, gameObject.GetComponent<Properties>().Instruction, language, currentTab);
@@ -54,7 +61,15 @@ public class SubBlockClass : ScriptableObject
             {
                 gameObjectString = subBlock.ConvertToString();
             }
-            fullString.AppendLine(gameObjectString);
+
+            if (resetFullString)
+            {
+                fullString.Append(gameObjectString);
+            }
+            else
+            {
+                fullString.AppendLine(gameObjectString);
+            }
         }
         currentTab--;
         return fullString.ToString();

@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 1fab386378d30dc409c0aa6d6d8685be, type: 2}
     - target: {fileID: 150616562227316008, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
       propertyPath: m_text
-      value: Mientras x
+      value: Mientras cond
       objectReference: {fileID: 0}
     - target: {fileID: 8082290141627041514, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
       propertyPath: Type

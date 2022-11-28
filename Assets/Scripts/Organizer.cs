@@ -91,7 +91,6 @@ public class Organizer
             { "If", "EndIf" },
             { "ElseIf", "EndElseIf" },
             { "Else", "EndElse" },
-            { "While", "EndWhile" },
             { "EndIf", "EndIf" }
         };
 

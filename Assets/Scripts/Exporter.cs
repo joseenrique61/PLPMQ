@@ -15,7 +15,6 @@ public class Exporter : ScriptableObject
     {
         Organizer organizer = new();
         string exported = organizer.Organize().ConvertToString();
-        Debug.LogWarning(exported);
         TextMeshPro tmp = Instantiate(text, Vector3.zero, Quaternion.identity);
         tmp.text = exported;
         return exported;
@@ -25,17 +24,5 @@ public class Exporter : ScriptableObject
     {
         Exporter.language = language;
         this.text = text;
-    }
-
-    private string TMPString(string exportedText)
-    {
-        StringBuilder stringBuilder = new();
-        string[] dividedString = exportedText.Split('\n');
-        foreach (string str in dividedString)
-        {
-            string str1 = str.Trim('r');
-            stringBuilder.AppendLine(str1);
-        }
-        return stringBuilder.ToString();
     }
 }

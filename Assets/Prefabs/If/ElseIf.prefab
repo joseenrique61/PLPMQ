@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4489690613347116949, guid: 966cbbfdd5e02fb4ca7d3a4a7112cc2a, type: 3}
       propertyPath: m_text
-      value: Sino Si x
+      value: Sino Si cond
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 966cbbfdd5e02fb4ca7d3a4a7112cc2a, type: 3}
