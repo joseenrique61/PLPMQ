@@ -67,7 +67,7 @@ public class Organizer
             
             if (addBlock)
             {
-                AddDividedBlock(GetInitialBlock(lastGameObject), lastGameObject);
+                AddDividedBlock(GetInitialBlock(internalBlocksInOrder, lastGameObject), lastGameObject);
             }
             else
             {
@@ -91,32 +91,68 @@ public class Organizer
             { "If", "EndIf" },
             { "ElseIf", "EndElseIf" },
             { "Else", "EndElse" },
-            { "EndIf", "EndIf" }
+            { "EndIf", "EndIf" },
         };
 
-        string currentTag = "";
-        foreach (GameObject gameObject in FullProcessCommands.BlocksInOrder)
+        Object[] temporalArray = FullProcessCommands.BlocksInOrder.ToArray();
+        List<Object> temporalBlocksInOrder = temporalArray.ToList();
+        List<List<Object>> separatedBlocksList = new();
+        List<Object> dividedBlocks = new();
+        while (true)
         {
-            if (tags.Keys.Contains(gameObject.tag))
+            foreach (Object Object1 in temporalBlocksInOrder)
             {
-                if (!string.IsNullOrEmpty(currentTag))
+                if (Object1 is GameObject gameObject)
                 {
-                    GameObject newGameObject = new()
+                    if (tags.ContainsValue(gameObject.tag) || gameObject.CompareTag("Fin"))
                     {
-                        tag = tags[currentTag]
-                    };
-
-                    newGameObject.AddComponent<Properties>();
-                    newGameObject.GetComponent<Properties>().Type = Properties.TypeEnum.Conditional;
-
-                    internalBlocksInOrder.Insert(internalBlocksInOrder.IndexOf(gameObject), newGameObject);
+                        dividedBlocks = CreateDividedBlocks(temporalBlocksInOrder, GetInitialBlock(temporalBlocksInOrder, gameObject), gameObject);
+                        separatedBlocksList.Add(dividedBlocks);
+                        break;
+                    }
                 }
-                currentTag = gameObject.tag;
             }
 
-            if (tags.Values.Contains(gameObject.tag))
+            foreach (Object obj in dividedBlocks)
             {
-                internalBlocksInOrder.Remove(gameObject);
+                temporalBlocksInOrder.Remove(obj);
+            }
+
+            if (temporalBlocksInOrder.Count == 0)
+            {
+                break;
+            }
+        }
+
+        foreach (List<Object> gameObjectList in separatedBlocksList)
+        {
+            string currentTag = "";
+            foreach (Object gObject in gameObjectList)
+            {
+                if (gObject is GameObject gameObject)
+                {
+                    if (tags.ContainsKey(gameObject.tag))
+                    {
+                        if (!string.IsNullOrEmpty(currentTag))
+                        {
+                            GameObject newGameObject = new()
+                            {
+                                tag = tags[currentTag]
+                            };
+
+                            newGameObject.AddComponent<Properties>();
+                            newGameObject.GetComponent<Properties>().Type = Properties.TypeEnum.Conditional;
+
+                            internalBlocksInOrder.Insert(internalBlocksInOrder.IndexOf(gameObject), newGameObject);
+                        }
+                        currentTag = gameObject.tag;
+                    }
+
+                    if (tags.ContainsValue(gameObject.tag))
+                    {
+                        internalBlocksInOrder.Remove(gameObject);
+                    }  
+                }
             }
         }
     }
@@ -126,7 +162,7 @@ public class Organizer
     /// </summary>
     /// <param name="currentBlock">Bloque actual, con el cual se va a obtener el bloque inicial.</param>
     /// <returns>Bloque inicial de la sentencia actual.</returns>
-    private GameObject GetInitialBlock(GameObject currentBlock)
+    private GameObject GetInitialBlock(List<Object> blocksInOrder, GameObject currentBlock)
     {
         GameObject gameObject = new();
         string initialTag = "";
@@ -145,11 +181,14 @@ public class Organizer
             case "EndElse":
                 initialTag = "Else";
                 break;
+            case "Fin":
+                initialTag = "Inicio";
+                break;
         }
 
-        for (int i = internalBlocksInOrder.IndexOf(currentBlock); i >= 0; i--)
+        for (int i = blocksInOrder.IndexOf(currentBlock); i >= 0; i--)
         {
-            if (internalBlocksInOrder[i] is GameObject currentGameObject)
+            if (blocksInOrder[i] is GameObject currentGameObject)
             {
                 if (currentGameObject.CompareTag(initialTag))
                 {
@@ -169,19 +208,25 @@ public class Organizer
     private void AddDividedBlock(GameObject initialBlock, GameObject finalBlock)
     {
         RemoveOpenS();
-        List<Object> blocks = new();
-        for (int i = internalBlocksInOrder.IndexOf(initialBlock); i <= internalBlocksInOrder.IndexOf(finalBlock); i++)
-        {
-            if (internalBlocksInOrder[i] is Object currentObject)
-            {
-                blocks.Add(currentObject);
-            }
-        }
+        List<Object> blocks = CreateDividedBlocks(internalBlocksInOrder, initialBlock, finalBlock);
         currentIndexOfDividedBlocks++;
         SubBlockClass subBlock = ScriptableObject.CreateInstance("SubBlockClass") as SubBlockClass;
         subBlock.Init(blocks.ToArray());
         dividedBlocks.Add(currentIndexOfDividedBlocks, subBlock);
         ReplaceInternalBIO(blocks, subBlock);
+    }
+
+    private List<Object> CreateDividedBlocks(List<Object> blocksInOrder, GameObject initialBlock, GameObject finalBlock)
+    {
+        List<Object> blocks = new();
+        for (int i = blocksInOrder.IndexOf(initialBlock); i <= blocksInOrder.IndexOf(finalBlock); i++)
+        {
+            if (blocksInOrder[i] is Object currentObject)
+            {
+                blocks.Add(currentObject);
+            }
+        }
+        return blocks;
     }
 
     /// <summary>
