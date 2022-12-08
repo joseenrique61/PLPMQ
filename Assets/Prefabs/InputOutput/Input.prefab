@@ -71,5 +71,9 @@ PrefabInstance:
       propertyPath: m_text
       value: Leer x
       objectReference: {fileID: 0}
+    - target: {fileID: 8980853639948351055, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59d3b2251b2e0d540a395b0c1fbb8b2c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
