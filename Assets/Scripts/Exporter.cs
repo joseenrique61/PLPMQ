@@ -2,27 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 
-public class Exporter : ScriptableObject
+public class Exporter : MonoBehaviour
 {
     public static string language;
 
-    [SerializeField]
-    public TextMeshPro text;
+    public string _language;
 
-    public string Export()
+    public TextMeshProUGUI text;
+
+    [HideInInspector]
+    public bool hovered = false;
+
+    public void Hovered()
     {
-        Organizer organizer = new();
-        string exported = organizer.Organize().ConvertToString();
-        TextMeshPro tmp = Instantiate(text, Vector3.zero, Quaternion.identity);
-        tmp.text = exported;
-        return exported;
+        hovered = true;
     }
 
-    public void Init(string language, TextMeshPro text)
+    public void Unhovered()
     {
-        Exporter.language = language;
-        this.text = text;
+        hovered = false;
+    }
+
+    public void Update()
+    {
+        if (hovered && OVRInput.GetUp(OVRInput.RawButton.A))
+        {
+            Clicked();
+        }
+    }
+
+    public void Clicked()
+    {
+        language = _language;
+        Export();
+    }
+
+    public void Export()
+    {
+        SyntaxChecker syntaxChecker = new();
+        Organizer organizer = new();
+        string exported = organizer.Organize().ConvertToString();
+        text.text = exported;
     }
 }

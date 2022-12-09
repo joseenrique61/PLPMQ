@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4347928361218347581}
   - component: {fileID: 9149402185633757087}
+  - component: {fileID: 5508919580174459991}
   - component: {fileID: 8464871006311439798}
   - component: {fileID: 1686918001523990588}
-  m_Layer: 0
-  m_Name: ExportButton
+  m_Layer: 6
+  m_Name: ExcerciseChecker
   m_TagString: If
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,6 +55,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &5508919580174459991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4349770133221727869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33fac40c780b0aa4681efcfeeb2b33f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  Type: 1
+  Condition: 
+  Name: 
+  Cant: 0
+  Instruction: 
 --- !u!114 &8464871006311439798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +125,7 @@ GameObject:
   - component: {fileID: 4487787016223344063}
   - component: {fileID: 4487787016223344062}
   - component: {fileID: 778689403860069101}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GrabInteractable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +218,7 @@ GameObject:
   - component: {fileID: 4487787016555596151}
   - component: {fileID: 4487787016555596150}
   - component: {fileID: 4487787016555596149}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: InteractableDebugVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4487787016649449967}
   - component: {fileID: 4487787016649449966}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,7 +368,7 @@ GameObject:
   - component: {fileID: 555946390521442222}
   - component: {fileID: 5211402116473749974}
   - component: {fileID: 206527606862440898}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -540,7 +559,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5556605938305803078}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -577,7 +596,7 @@ GameObject:
   - component: {fileID: 4674392065151179596}
   - component: {fileID: 4067697274947644119}
   - component: {fileID: 2485957718352635522}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HandGrabInteractable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -830,7 +849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7288929031922728567, guid: 1dc088c027746a341a9856a0ee30761c, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dc088c027746a341a9856a0ee30761c, type: 3}
