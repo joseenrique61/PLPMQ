@@ -43,8 +43,15 @@ public class Exporter : MonoBehaviour
     public void Export()
     {
         SyntaxChecker syntaxChecker = new();
-        Organizer organizer = new();
-        string exported = organizer.Organize().ConvertToString();
-        text.text = exported;
+        if (syntaxChecker.CheckSyntax(out string error))
+        {
+            Organizer organizer = new();
+            string exported = organizer.Organize().ConvertToString();
+            text.text = exported;
+        }
+        else
+        {
+            text.text = error;
+        }
     }
 }

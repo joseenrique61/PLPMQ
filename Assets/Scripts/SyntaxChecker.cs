@@ -11,8 +11,9 @@ public class SyntaxChecker
     /// Itera a través de la lista con los bloques en orden y determina si hay errores de sintaxis o no.
     /// </summary>
     /// <returns>True si no hay errores, false si hay.</returns>
-    public bool CheckSyntax()
+    public bool CheckSyntax(out string error)
     {
+        error = null;
         bool correctSyntax = true;
 
         foreach (GameObject gameObject in FullProcessCommands.BlocksInOrder)
@@ -29,7 +30,8 @@ public class SyntaxChecker
                 {
                     if (!(type == openSentences[currentSentence].ifWhileGameObject.GetComponent<Properties>().Type))
                     {
-                        Debug.LogError("Se inició una sentencia Else sin un If.");
+                        error = "Se inició una sentencia Else sin un If.";
+                        Debug.LogError(error);
                         correctSyntax = false;
                         break;
                     }
@@ -40,14 +42,16 @@ public class SyntaxChecker
                     }
                     else
                     {
-                        Debug.LogError("Hay una sentencia Else luego de otro Else.");
+                        error = "Hay una sentencia Else luego de otro Else.";
+                        Debug.LogError(error);
                         correctSyntax= false;
                         break;
                     }
                 }
                 catch (KeyNotFoundException)
                 {
-                    Debug.LogError("Hay una sentencia Else luego del cierre del If.");
+                    error = "Hay una sentencia Else luego del cierre del If.";
+                    Debug.LogError(error);
                     correctSyntax = false;
                     break;
                 }
@@ -58,21 +62,24 @@ public class SyntaxChecker
                 {
                     if (!(type == openSentences[currentSentence].ifWhileGameObject.GetComponent<Properties>().Type))
                     {
-                        Debug.LogError("Se inició una sentencia ElseIf sin un If.");
+                        error = "Se inició una sentencia ElseIf sin un If.";
+                        Debug.LogError(error);
                         correctSyntax = false;
                         break;
                     }
 
                     if (openSentences[currentSentence].hasElse)
                     {
-                        Debug.LogError("Hay una sentencia ElseIf luego de un Else.");
+                        error = "Hay una sentencia ElseIf luego de un Else.";
+                        Debug.LogError(error);
                         correctSyntax = false;
                         break;
                     }
                 }
                 catch (KeyNotFoundException)
                 {
-                    Debug.LogError("Hay una sentencia ElseIf luego del cierre del If.");
+                    error = "Hay una sentencia ElseIf luego del cierre del If.";
+                    Debug.LogError(error);
                     correctSyntax = false;
                     break;
                 }
@@ -88,7 +95,8 @@ public class SyntaxChecker
                 }
                 catch (KeyNotFoundException)
                 {
-                    Debug.LogError("No es correcta la sintaxis.");
+                    error = "No se cerró una sentencia.";
+                    Debug.LogError(error);
                     correctSyntax = false;
                     break;
                 }
@@ -97,12 +105,14 @@ public class SyntaxChecker
 
         if (openSentences.Count > 0)
         {
-            Debug.LogError($"Hay {openSentences.Count} sentencia/s abierta/s todavía.");
+            error = $"Hay {openSentences.Count} sentencia/s abierta/s todavía.";
+            Debug.LogError(error);
         }
 
         if (!FullProcessCommands.BlocksInOrder[^1].CompareTag("Fin"))
         {
-            Debug.LogError("No hay un bloque de fin.");
+            error = "No hay un bloque de fin.";
+            Debug.LogError(error);
         }
 
         return correctSyntax;
