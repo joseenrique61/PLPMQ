@@ -1,11 +1,21 @@
 ﻿using Oculus.Interaction;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+using System.Xml.Linq;
 using Unity.XR.CoreUtils;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
+[Serializable]
 public class FullProcessCommands : MonoBehaviour {
-    
+
+    [DataMember]
     private static List<GameObject> blocksInOrder = new();
     
     public static List<GameObject> BlocksInOrder

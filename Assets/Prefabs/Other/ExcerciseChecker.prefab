@@ -10,12 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4347928361218347581}
   - component: {fileID: 9149402185633757087}
-  - component: {fileID: 5508919580174459991}
   - component: {fileID: 8464871006311439798}
   - component: {fileID: 1686918001523990588}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: ExcerciseChecker
-  m_TagString: If
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4349770133221727869}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
@@ -38,7 +37,7 @@ Transform:
   - {fileID: 868763682408106152}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &9149402185633757087
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -55,24 +54,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &5508919580174459991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4349770133221727869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33fac40c780b0aa4681efcfeeb2b33f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 0}
-  Type: 1
-  Condition: 
-  Name: 
-  Cant: 0
-  Instruction: 
 --- !u!114 &8464871006311439798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +93,7 @@ MonoBehaviour:
   _forwardElement: {fileID: 0}
   _oneGrabTransformer: {fileID: 0}
   _twoGrabTransformer: {fileID: 0}
-  _maxGrabPoints: 1
+  _maxGrabPoints: 0
 --- !u!1 &4487787016223344060
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +348,7 @@ GameObject:
   - component: {fileID: 8027753823126253955}
   - component: {fileID: 555946390521442222}
   - component: {fileID: 5211402116473749974}
-  - component: {fileID: 206527606862440898}
+  - component: {fileID: 5226670411372410270}
   m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
@@ -384,7 +365,7 @@ Transform:
   m_GameObject: {fileID: 5110460405604787062}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.48, y: 1, z: 4.41}
+  m_LocalScale: {x: 0.48, y: 1, z: 4.71}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5556605938305803078}
@@ -418,7 +399,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 027d6f94a79a6bd4b910d49d951720ce, type: 2}
+  - {fileID: 2100000, guid: a601c9297de3c014fb7dfdd3dacaa681, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -489,40 +470,40 @@ MonoBehaviour:
   _interactableView: {fileID: 4067697274947644119}
   _whenHover:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 206527606862440898}
-        m_TargetAssemblyTypeName: Exporter, Assembly-CSharp
-        m_MethodName: Hovered
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _whenUnhover:
     m_PersistentCalls:
+      m_Calls: []
+  _whenSelect:
+    m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 206527606862440898}
-        m_TargetAssemblyTypeName: Exporter, Assembly-CSharp
-        m_MethodName: Unhovered
+      - m_Target: {fileID: 5226670411372410270}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _whenSelect:
-    m_PersistentCalls:
-      m_Calls: []
   _whenUnselect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5226670411372410270}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenInteractorViewAdded:
     m_PersistentCalls:
       m_Calls: []
@@ -535,7 +516,7 @@ MonoBehaviour:
   _whenSelectingInteractorViewRemoved:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &206527606862440898
+--- !u!114 &5226670411372410270
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -544,12 +525,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5110460405604787062}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c03460465cf011d4ea891baf60aa694a, type: 3}
+  m_Script: {fileID: 11500000, guid: 49bf16fe2e799a14a811d6414ce2bfc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _language: c
-  text: {fileID: 0}
-  hovered: 0
+  selected: 0
+  exportParent: {fileID: 0}
+  headerTMP: {fileID: 0}
+  bodyTMP: {fileID: 0}
 --- !u!1 &5657016333057909421
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,7 +739,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1838389926654901897, guid: 1dc088c027746a341a9856a0ee30761c, type: 3}
       propertyPath: m_text
-      value: Exportar a
+      value: Revisar ejercicio
       objectReference: {fileID: 0}
     - target: {fileID: 2702061916973791965, guid: 1dc088c027746a341a9856a0ee30761c, type: 3}
       propertyPath: m_Pivot.x
@@ -805,7 +787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2702061916973791965, guid: 1dc088c027746a341a9856a0ee30761c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.85
+      value: -7.78
       objectReference: {fileID: 0}
     - target: {fileID: 2702061916973791965, guid: 1dc088c027746a341a9856a0ee30761c, type: 3}
       propertyPath: m_LocalRotation.w

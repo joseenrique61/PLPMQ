@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8082290141627041514}
   - component: {fileID: 5269438547535740683}
   - component: {fileID: 3112180686792999553}
+  - component: {fileID: 8722629866662173180}
   m_Layer: 6
   m_Name: Proceso
   m_TagString: Proceso
@@ -113,6 +114,18 @@ MonoBehaviour:
   _oneGrabTransformer: {fileID: 0}
   _twoGrabTransformer: {fileID: 0}
   _maxGrabPoints: 1
+--- !u!114 &8722629866662173180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391739900574912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253832a59134bbd468d3b6ec2edd75fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6834080440819136564
 GameObject:
   m_ObjectHideFlags: 0

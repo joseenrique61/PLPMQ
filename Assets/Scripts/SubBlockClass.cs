@@ -11,7 +11,7 @@ public class SubBlockClass : ScriptableObject
 
     public void Init(Object[] blocks)
     {
-        language = Exporter.language;
+        language = Exporter.currentLanguage;
         this.blocks = blocks.ToList();
         this.blocks.RemoveAt(this.blocks.Count - 1);
 

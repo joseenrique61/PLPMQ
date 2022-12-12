@@ -107,12 +107,14 @@ public class SyntaxChecker
         {
             error = $"Hay {openSentences.Count} sentencia/s abierta/s todavía.";
             Debug.LogError(error);
+            correctSyntax = false;
         }
 
         if (!FullProcessCommands.BlocksInOrder[^1].CompareTag("Fin"))
         {
             error = "No hay un bloque de fin.";
             Debug.LogError(error);
+            correctSyntax = false;
         }
 
         return correctSyntax;

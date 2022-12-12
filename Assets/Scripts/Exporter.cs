@@ -1,17 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 using TMPro;
-using Unity.VisualScripting.ReorderableList;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Exporter : MonoBehaviour
 {
-    public static string language;
+    public static string currentLanguage;
 
-    public string _language;
+    public string thisBlockLanguage;
 
-    public TextMeshProUGUI text;
+    public TextMeshProUGUI headerTMP;
+
+    public TextMeshProUGUI bodyTMP;
 
     [HideInInspector]
     public bool hovered = false;
@@ -36,22 +35,15 @@ public class Exporter : MonoBehaviour
 
     public void Clicked()
     {
-        language = _language;
+        currentLanguage = thisBlockLanguage;
         Export();
     }
 
     public void Export()
     {
-        SyntaxChecker syntaxChecker = new();
-        if (syntaxChecker.CheckSyntax(out string error))
-        {
-            Organizer organizer = new();
-            string exported = organizer.Organize().ConvertToString();
-            text.text = exported;
-        }
-        else
-        {
-            text.text = error;
-        }
+        Organizer organizer = new();
+        string exported = organizer.Organize().ConvertToString();
+        headerTMP.text = $"Código exportado a {currentLanguage.FirstCharacterToUpper()}";
+        bodyTMP.text = exported;
     }
 }
