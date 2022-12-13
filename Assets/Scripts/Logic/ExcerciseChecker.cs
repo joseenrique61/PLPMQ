@@ -10,6 +10,8 @@ public class ExcerciseChecker : MonoBehaviour
 
     public GameObject exportParent;
 
+    public GameObject nextLevel;
+
     public TextMeshProUGUI headerTMP;
     
     public TextMeshProUGUI bodyTMP;
@@ -43,6 +45,7 @@ public class ExcerciseChecker : MonoBehaviour
                 bodyTMP.text = "";
                 exportParent.SetActive(true);
                 initialParent.SetActive(false);
+                nextLevel.SetActive(true);
             }
             else
             {

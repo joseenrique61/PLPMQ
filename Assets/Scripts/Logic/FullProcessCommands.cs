@@ -1,16 +1,9 @@
 ﻿using Oculus.Interaction;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Xml.Linq;
 using Unity.XR.CoreUtils;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [Serializable]
 public class FullProcessCommands : MonoBehaviour {
@@ -47,7 +40,9 @@ public class FullProcessCommands : MonoBehaviour {
     {
         for (int i = index; i < BlocksInOrder.Count; i++)
         {
-            BlocksInOrder[i].transform.localPosition = new Vector3(BlocksInOrder[0].transform.localPosition.x + 0.00055f, BlocksInOrder[0].transform.localPosition.y - 0.2012f * i, BlocksInOrder[0].transform.localPosition.z);
+            float otherOffset = BlocksInOrder[i - 1].GetComponent<BlockOffset>().downOffset;
+            float thisOffset = BlocksInOrder[i].GetComponent<BlockOffset>().thisOffset;
+            BlocksInOrder[i].transform.localPosition = new Vector3(BlocksInOrder[i - 1].transform.localPosition.x, BlocksInOrder[i - 1].transform.localPosition.y - 0.2012f, BlocksInOrder[i - 1].transform.localPosition.z - otherOffset - thisOffset);
             BlocksInOrder[i].transform.localRotation = BlocksInOrder[0].transform.localRotation;
         }
     }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5269438547535740683}
   - component: {fileID: 3112180686792999553}
   - component: {fileID: 8722629866662173180}
+  - component: {fileID: 120828914776499999}
   m_Layer: 6
   m_Name: Proceso
   m_TagString: Proceso
@@ -126,6 +127,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253832a59134bbd468d3b6ec2edd75fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
+--- !u!114 &120828914776499999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391739900574912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc3776607671e949a2701ed6ea62ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisOffset: 0.1210754
+  downOffset: -0.1210754
 --- !u!1 &6834080440819136564
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,10 +269,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0529a9671a3b6a74fab00c4d05312c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 0}
+  _renderer: {fileID: 8980853639948351055}
   _customIcon: {fileID: 2800000, guid: aa3a2b3718100f84fb5d8ff9adb8ccb7, type: 3}
   _colliders:
-  - {fileID: 0}
+  - {fileID: 5994786665218249534}
   _snappiness: 0.8
 --- !u!114 &300281276327807082
 MonoBehaviour:
@@ -458,7 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Flecha: {fileID: 3763916195081105439, guid: 75c038feacb15e8438ef5a6d38fbe067, type: 3}
-  parent: {fileID: 7792370961449256705, guid: 0b396c9f3ed6941458c50905491b0eb0, type: 3}
+  parent: {fileID: 0}
   selected: 0
   hovered: 0
   initialParent: {fileID: 4359471403397248}

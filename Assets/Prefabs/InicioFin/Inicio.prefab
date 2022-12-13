@@ -66,7 +66,19 @@ PrefabInstance:
     - target: {fileID: 503046396310929541, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -1843689209865246678, guid: 55d5ac7b2c9a2574fabdedadfeee4cf4, type: 3}
+      objectReference: {fileID: -1843689209865246678, guid: 25914508370676d40a9ae3a17f7cf8a1, type: 3}
+    - target: {fileID: 2354306294102624366, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354306294102624366, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354306294102624366, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 5269438547535740683, guid: 57e750110a8b8c1439e78591a1e43f1a, type: 3}
       propertyPath: _rigidbody
       value: 
