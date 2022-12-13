@@ -4,7 +4,7 @@ using UnityEngine;
 public class ExcerciseChecker : MonoBehaviour
 {
     [HideInInspector]
-    public bool selected;
+    public bool hovered;
 
     public GameObject initialParent;
 
@@ -16,19 +16,19 @@ public class ExcerciseChecker : MonoBehaviour
     
     public TextMeshProUGUI bodyTMP;
 
-    public void Selected()
+    public void Hovered()
     {
-        selected = true;
+        hovered = true;
     }
 
-    public void Unselected()
+    public void Unhovered()
     {
-        selected = false;
+        hovered = false;
     }
 
     public void Update()
     {
-        if (selected && OVRInput.GetUp(OVRInput.RawButton.A))
+        if (hovered && OVRInput.GetUp(OVRInput.RawButton.A))
         {
             CheckExcercise();
         }
@@ -44,7 +44,7 @@ public class ExcerciseChecker : MonoBehaviour
                 headerTMP.text = "¡Correcto!";
                 bodyTMP.text = "";
                 exportParent.SetActive(true);
-                initialParent.SetActive(false);
+                //initialParent.SetActive(false);
                 nextLevel.SetActive(true);
             }
             else

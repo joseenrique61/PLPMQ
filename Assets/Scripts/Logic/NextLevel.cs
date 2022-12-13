@@ -4,21 +4,21 @@ using UnityEngine.SceneManagement;
 public class NextLevel : MonoBehaviour
 {
     [HideInInspector]
-    public bool selected = false;
+    public bool hovered = false;
 
-    public void Selected()
+    public void Hovered()
     {
-        selected = true;
+        hovered = true;
     }
 
-    public void Unselected()
+    public void Unhovered()
     {
-        selected = false;
+        hovered = false;
     }
 
     public void Update()
     {
-        if (selected && OVRInput.GetUp(OVRInput.RawButton.A))
+        if (hovered && OVRInput.GetUp(OVRInput.RawButton.A))
         {
             PassToNextLevel();
         }

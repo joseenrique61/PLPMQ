@@ -49,6 +49,7 @@ public class FullProcessCommands : MonoBehaviour {
 
     public void Awake()
     {
+        BlocksInOrder.Clear();
         BlocksInOrder.Add(gameObject);
     }
 }
